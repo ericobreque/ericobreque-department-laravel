@@ -14,7 +14,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+        // Muestra todos los datos
         $departments = Department::all();
         return response()->json($departments);
     }
@@ -37,7 +37,7 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Guarda un registro
         $department = new Department;
         $department->name = $request->name;
         $department->department_id = $request->department_id;
@@ -61,7 +61,8 @@ class DepartmentController extends Controller
      */
     public function show(Department $department)
     {
-        //
+        // Muestra un registro
+        // Requiere del id del departamento a mostrar
         return response()->json($department);
     }
 
@@ -73,7 +74,8 @@ class DepartmentController extends Controller
      */
     public function showSubDepartments($department)
     {
-        //
+        // Muestra todos los subdepartamentos correspondientes a un departamento superior
+        // Necesita el id del departamento superior
         $subDepartments = Department::where('department_id',$department)->get();
         return response()->json($subDepartments);
     }
@@ -98,7 +100,8 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, Department $department)
     {
-        //
+        // Actualiza un registro
+        // Requiere del id del departamento a actualizar
         $department->name = $request->name;
         $department->department_id = $request->department_id;
         $department->employee = $request->employee;
@@ -121,7 +124,8 @@ class DepartmentController extends Controller
      */
     public function destroy(Department $department)
     {
-        //
+        // Elimina un registro
+        // Requiere del id del departamento a elimninar
         $department->delete();
 
         $data = [
