@@ -14,8 +14,13 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        // Muestra todos los datos
-        $departments = Department::all();
+        // Muestra todos los datos, incluyendo cantidad de subdivisiones
+        $departments = Department::select('departments.id','departments.name','departments.employee','departments.ambassador','departments.level', Department::raw('count(b.department_id) subdivisions'), Department::raw('c.name as division'))
+                                ->leftJoin('departments as b', 'b.department_id', '=', 'departments.id')
+                                ->leftJoin('departments as c', 'c.id', '=', 'departments.department_id')
+                                ->groupBy('departments.id')
+                                ->orderBy('departments.id')
+                                ->get();
         return response()->json($departments);
     }
 

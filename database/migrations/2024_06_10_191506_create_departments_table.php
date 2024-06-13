@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 45)->unique();
             $table->integer('department_id')->nullable();
+            $table->integer('level')->nullable();
             $table->integer('employee')->nullable();
             $table->string('ambassador', 100)->nullable();
             $table->timestamps();
